@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.octavian.peliculescrud.FirstFragment"
+        android:name="com.octavian.peliculescrud.ui.MovieListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_movie_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.octavian.peliculescrud.SecondFragment"
+        android:name="com.octavian.peliculescrud.ui.AddMovieFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_add_movie">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
