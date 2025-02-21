@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.octavian.peliculescrud.MainActivity
 import com.octavian.peliculescrud.MovieAdapter
 import com.octavian.peliculescrud.R
 import com.octavian.peliculescrud.databinding.FragmentMovieListBinding
@@ -49,6 +50,9 @@ class MovieListFragment : Fragment() {
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+
+        // Canviar el títol del toolbar
+        (activity as? MainActivity)?.setToolbarTitle("Llistat de Pel·lícules")
     }
 
     override fun onDestroyView() {

@@ -51,4 +51,9 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    // Afegim una funció per actualitzar el títol
+    fun setToolbarTitle(title: String) {
+        supportActionBar?.title = title
+    }
 }
