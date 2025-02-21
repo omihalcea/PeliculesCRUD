@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.octavian.peliculescrud.data.Movie
 import com.octavian.peliculescrud.databinding.ItemMovieBinding
 
-class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
+class MovieAdapter(private val onItemClicked: (Movie) -> Unit) :
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MovieViewHolder(binding)
+        return MovieViewHolder(binding, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -21,12 +22,18 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffC
         holder.bind(movie)
     }
 
-    class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MovieViewHolder(
+        private val binding: ItemMovieBinding,
+        private val onItemClicked: (Movie) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(movie: Movie) {
             binding.textViewTitle.text = movie.title
             binding.textViewDirector.text = "Director: ${movie.director}"
             binding.textViewYear.text = "Any: ${movie.year}"
+            binding.root.setOnClickListener {
+                onItemClicked(movie)
+            }
         }
     }
 }

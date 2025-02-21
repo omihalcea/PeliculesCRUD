@@ -31,8 +31,11 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Configurar el RecyclerView
-        adapter = MovieAdapter()
+        // Configurar el RecyclerView i l'adapter amb la funció de clic
+        adapter = MovieAdapter { movie ->
+            val bundle = Bundle().apply { putInt("movieId", movie.id) }
+            findNavController().navigate(R.id.EditMovieFragment, bundle)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 

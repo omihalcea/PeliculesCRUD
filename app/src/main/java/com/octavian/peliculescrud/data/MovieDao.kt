@@ -2,7 +2,6 @@ package com.octavian.peliculescrud.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.octavian.peliculescrud.data.Movie
 
 @Dao
 interface MovieDao {
@@ -17,4 +16,7 @@ interface MovieDao {
 
     @Query("SELECT * FROM movies ORDER BY id DESC")
     fun getAllMovies(): LiveData<List<Movie>>
+
+    @Query("SELECT * FROM movies WHERE id = :id")
+    fun getMovieById(id: Int): LiveData<Movie>
 }

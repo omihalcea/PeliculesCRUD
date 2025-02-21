@@ -14,6 +14,16 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <!-- Navegació cap a EditMovieFragment amb argument -->
+        <action
+            android:id="@+id/action_EditMovieFragment_to_FirstFragment"
+            app:destination="@id/EditMovieFragment">
+            <argument
+                android:name="movieId"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -23,6 +33,24 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <!-- Fragment per editar una pel·lícula -->
+    <fragment
+        android:id="@+id/EditMovieFragment"
+        android:name="com.octavian.peliculescrud.ui.EditMovieFragment"
+        android:label="Edit Movie"
+        tools:layout="@layout/fragment_edit_movie">
+
+        <!-- Argument requerit per identificar la pel·lícula a editar -->
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            app:nullable="false" />
+
+        <!-- Tornar a la llista després d'editar -->
+        <action
+            android:id="@+id/action_editMovie_to_movieList"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

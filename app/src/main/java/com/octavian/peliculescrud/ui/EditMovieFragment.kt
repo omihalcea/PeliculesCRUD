@@ -1,60 +1,71 @@
 package com.octavian.peliculescrud.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.octavian.peliculescrud.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.octavian.peliculescrud.data.Movie
+import com.octavian.peliculescrud.databinding.FragmentEditMovieBinding
+import com.octavian.peliculescrud.viewmodel.MovieViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditMovieFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditMovieFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentEditMovieBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var movieViewModel: MovieViewModel
+    private var currentMovie: Movie? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_movie, container, false)
+    ): View {
+        _binding = FragmentEditMovieBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditMovieFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditMovieFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        movieViewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
+
+        // Recuperem l'argument (l'id de la pel·lícula)
+        val movieId = arguments?.getInt("movieId")
+        movieId?.let { id ->
+            // Suposem que al MovieViewModel tens una funció getMovieById
+            movieViewModel.getMovieById(id).observe(viewLifecycleOwner) { movie ->
+                movie?.let {
+                    currentMovie = it
+                    binding.editTextTitle.setText(it.title)
+                    binding.editTextDirector.setText(it.director)
+                    binding.editTextYear.setText(it.year.toString())
                 }
             }
+        }
+
+        binding.buttonUpdate.setOnClickListener {
+            currentMovie?.let { movie ->
+                val updatedMovie = movie.copy(
+                    title = binding.editTextTitle.text.toString(),
+                    director = binding.editTextDirector.text.toString(),
+                    year = binding.editTextYear.text.toString().toIntOrNull() ?: movie.year
+                )
+                movieViewModel.updateMovie(updatedMovie)
+                findNavController().navigateUp()
+            }
+        }
+
+        // Afegim el listener per al botó de cancel·lar
+        binding.buttonCancel.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
