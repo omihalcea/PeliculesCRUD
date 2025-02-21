@@ -1,12 +1,12 @@
-package com.octavian.peliculescrud.ui
+package com.octavian.peliculescrud.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.crud.data.Movie
-import com.example.crud.data.MovieDao
-import com.example.crud.data.MovieDatabase
+import com.octavian.peliculescrud.data.Movie
+import com.octavian.peliculescrud.data.MovieDao
+import com.octavian.peliculescrud.data.MovieDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

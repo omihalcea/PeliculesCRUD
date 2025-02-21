@@ -1,7 +1,8 @@
-package com.example.crud.data
+package com.octavian.peliculescrud.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.octavian.peliculescrud.data.Movie
 
 @Dao
 interface MovieDao {

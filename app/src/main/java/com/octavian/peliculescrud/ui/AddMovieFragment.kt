@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.crud.data.Movie
-import com.example.crud.data.MovieDao
-import com.example.crud.data.MovieDatabase
+import com.octavian.peliculescrud.data.Movie
+import com.octavian.peliculescrud.data.MovieDao
+import com.octavian.peliculescrud.data.MovieDatabase
 import com.octavian.peliculescrud.R
 import com.octavian.peliculescrud.databinding.FragmentAddMovieBinding
 import kotlinx.coroutines.Dispatchers

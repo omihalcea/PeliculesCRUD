@@ -1,4 +1,4 @@
-package com.octavian.peliculescrud.ui
+package com.octavian.peliculescrud
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crud.data.Movie
+import com.octavian.peliculescrud.data.Movie
 import com.octavian.peliculescrud.databinding.ItemMovieBinding
 
 class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {

@@ -1,4 +1,4 @@
-package com.example.crud.data
+package com.octavian.peliculescrud.data
 
 import android.content.Context
 import androidx.room.Database

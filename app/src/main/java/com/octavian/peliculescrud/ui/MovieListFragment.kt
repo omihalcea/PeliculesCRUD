@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.octavian.peliculescrud.MovieAdapter
 import com.octavian.peliculescrud.R
 import com.octavian.peliculescrud.databinding.FragmentMovieListBinding
+import com.octavian.peliculescrud.viewmodel.MovieViewModel
 
 class MovieListFragment : Fragment() {
 
