@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.octavian.peliculescrud.MainActivity
 import com.octavian.peliculescrud.data.Movie
@@ -13,14 +13,14 @@ import com.octavian.peliculescrud.data.MovieDao
 import com.octavian.peliculescrud.data.MovieDatabase
 import com.octavian.peliculescrud.R
 import com.octavian.peliculescrud.databinding.FragmentAddMovieBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.octavian.peliculescrud.viewmodel.MovieViewModel
 
 class AddMovieFragment : Fragment() {
 
     private var _binding: FragmentAddMovieBinding? = null
     private val binding get() = _binding!!
     private lateinit var movieDao: MovieDao
+    private val MovieViewModel: MovieViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,9 +60,7 @@ class AddMovieFragment : Fragment() {
 
             val movie = Movie(title = title, director = director, year = year)
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                movieDao.insertMovie(movie)
-            }
+            MovieViewModel.addMovie(movie)
 
             findNavController().navigateUp()
         }

@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.octavian.peliculescrud.MainActivity
 import com.octavian.peliculescrud.MovieAdapter
 import com.octavian.peliculescrud.R
+import com.octavian.peliculescrud.SwipeToDeleteCallback
 import com.octavian.peliculescrud.databinding.FragmentMovieListBinding
 import com.octavian.peliculescrud.viewmodel.MovieViewModel
 
@@ -53,6 +55,12 @@ class MovieListFragment : Fragment() {
 
         // Canviar el títol del toolbar
         (activity as? MainActivity)?.setToolbarTitle("Llistat de Pel·lícules")
+
+        // Configurar ItemTouchHelper per desarregar
+        val itemTouchHelperCallback = SwipeToDeleteCallback(adapter, movieViewModel)
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+
     }
 
     override fun onDestroyView() {
