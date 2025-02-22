@@ -45,4 +45,10 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="t_tol">Títol</string>
+    <string name="director">Director</string>
+    <string name="any">Any</string>
+    <string name="desar">Desar</string>
+    <string name="cancel_lar">Cancel·lar</string>
+    <string name="actualitzar">Actualitzar</string>
 </resources>
